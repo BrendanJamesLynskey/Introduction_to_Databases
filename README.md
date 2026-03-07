@@ -4,10 +4,6 @@ An interactive slide deck covering relational theory, SQL, transactions, indexin
 
 ## ▶ [Open Presentation](https://brendanjameslynskey.github.io/Introduction_to_Databases/index.html)
 
-> **Setup:** Enable GitHub Pages (Settings → Pages → Deploy from `main` branch, `/ (root)` directory), then replace the link above with your GitHub username and repository name.
->
-> Alternatively, open `index.html` locally in any browser — the presentation works offline after first load.
-
 ---
 
 ## Contents
