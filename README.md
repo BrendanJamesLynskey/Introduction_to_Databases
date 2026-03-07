@@ -2,7 +2,7 @@
 
 An interactive slide deck covering relational theory, SQL, transactions, indexing, NoSQL models, and how to choose the right database engine. Aimed at mid-level software engineers.
 
-## ▶ [Open the Presentation](https://YOUR-USERNAME.github.io/YOUR-REPO/)
+## ▶ [Open the Presentation](https://brendanjameslynskey.github.io/Introduction_to_Databases/)
 
 > **Setup:** Enable GitHub Pages (Settings → Pages → Deploy from `main` branch, `/ (root)` directory), then replace the link above with your GitHub username and repository name.
 >
