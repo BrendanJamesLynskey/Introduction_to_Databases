@@ -264,7 +264,8 @@
     /* ── Fade fragments ───────────────────────────────────────────── */
     .reveal .fragment { opacity: 0.15; }
     .reveal .fragment.visible { opacity: 1; }
-  </style>
+  .reveal .slides > section { overflow-y: auto !important; align-items: flex-start !important; justify-content: flex-start !important; }
+</style>
 </head>
 <body>
 <div class="reveal">
@@ -1247,15 +1248,30 @@ CREATE INDEX idx_users_tier ON users(tier);
     slideNumber: true,
     progress: true,
     controls: true,
-    center: true,
+    center: false,
     width: 1280,
-    height: 720,
-    margin: 0.04,
+    height: 900,
+    margin: 0.02,
     transition: 'fade',
     transitionSpeed: 'fast',
     backgroundTransition: 'none',
     plugins: [ RevealHighlight, RevealNotes ]
   });
+</script>
+<script>
+(function(){
+  var h = Reveal.getConfig().height || 900;
+  var m = Reveal.getConfig().margin || 0.02;
+  var maxH = Math.floor(h * (1 - 2 * m)) + 'px';
+  function fixSlides(){
+    document.querySelectorAll('.reveal .slides>section,.reveal .slides>section>section').forEach(function(s){
+      s.style.display = 'block';
+      s.style.maxHeight = maxH;
+    });
+  }
+  Reveal.on('ready', fixSlides);
+  Reveal.on('slidechanged', fixSlides);
+})();
 </script>
 </body>
 </html>
