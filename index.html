@@ -1,270 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Introduction to Databases</title>
 
-  <!-- Reveal.js -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/black.min.css" />
-  <!-- Syntax highlighting -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/monokai.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/black.min.css">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
-    /* ── Base theme overrides ─────────────────────────────────────── */
-    :root {
-      --bg:        #0a0a0f;
-      --bg2:       #111118;
-      --bg3:       #1a1a28;
-      --amber:     #f5a623;
-      --amber-dim: #c47d0e;
-      --green:     #4ecca3;
-      --green-dim: #2a8c6e;
-      --purple:    #a78bfa;
-      --purple-dim:#6d52c4;
-      --text:      #e8e8f0;
-      --text-dim:  #9090b0;
-      --border:    #2a2a3a;
-    }
+  :root {
+    --amber:  #f5a623;
+    --green:  #4ecb8d;
+    --purple: #a78bfa;
+    --blue:   #60a5fa;
+    --red:    #f87171;
+    --bg:     #0a0a0f;
+    --bg2:    #10101a;
+    --bg3:    #181824;
+    --border: #2a2a3a;
+    --text:   #e8e8f0;
+    --muted:  #8888a8;
+  }
 
-    .reveal-viewport { background: var(--bg); }
-    .reveal { font-family: 'DM Sans', sans-serif; font-size: 36px; color: var(--text); background: var(--bg); }
-    .reveal .slides section { background: transparent; }
+  .reveal-viewport { background: var(--bg); }
+  .reveal .slides section { background: transparent; }
 
-    /* ── Typography ───────────────────────────────────────────────── */
-    .reveal h1, .reveal h2, .reveal h3 {
-      font-family: 'Playfair Display', serif;
-      color: var(--text);
-      text-transform: none;
-      letter-spacing: 0.01em;
-    }
-    .reveal h1 { font-size: 2.0em; line-height: 1.2; margin-bottom: 0.3em; }
-    .reveal h2 { font-size: 1.35em; color: var(--amber); margin-bottom: 0.6em; border-bottom: 1px solid var(--border); padding-bottom: 0.25em; }
-    .reveal h3 { font-size: 1.0em; color: var(--green); margin-bottom: 0.35em; }
-    .reveal p  { font-size: 0.72em; line-height: 1.7; color: var(--text); margin: 0.4em 0; }
-    .reveal ul, .reveal ol { font-size: 0.68em; line-height: 1.8; margin-left: 1.2em; }
-    .reveal li { margin-bottom: 0.2em; }
-    .reveal strong { color: var(--amber); font-weight: 600; }
-    .reveal em     { color: var(--green); font-style: normal; font-weight: 600; }
-    .reveal code   { font-family: 'JetBrains Mono', monospace; font-size: 0.82em;
-                     background: #1c1c2e; color: var(--green); padding: 0.1em 0.35em;
-                     border-radius: 3px; }
-    .reveal pre    { font-size: 0.62em; background: #0e0e1a; border: 1px solid var(--border);
-                     border-radius: 6px; padding: 0.8em 1em; margin: 0.6em 0; box-shadow: none; }
-    .reveal pre code { background: transparent; padding: 0; font-size: 1em; }
-    .reveal a { color: var(--purple); text-decoration: none; }
-    .reveal a:hover { color: var(--amber); }
+  .reveal { font-family: 'DM Sans', sans-serif; color: var(--text); }
+  .reveal h1, .reveal h2, .reveal h3 { font-family: 'Playfair Display', serif; font-weight: 700; }
+  .reveal h1 { font-size: 1.6em; color: var(--amber); line-height: 1.1; }
+  .reveal h2 { font-size: 1.1em; color: var(--amber); margin-bottom: .2em; }
+  .reveal h3 { font-size: .78em; color: var(--green); margin-bottom: .15em; }
+  .reveal p  { font-size: .56em; line-height: 1.45; color: var(--text); }
+  .reveal li { font-size: .54em; line-height: 1.45; margin-bottom: .1em; }
+  .reveal code { font-family: 'JetBrains Mono', monospace; font-size: .72em; }
+  .reveal pre  { box-shadow: none; background: var(--bg3); border: 1px solid var(--border);
+                 border-radius: 6px; padding: .3em .5em; margin: .25em 0; }
+  .reveal pre code { font-size: .52em; line-height: 1.35; background: transparent; color: #cdd6f4; }
 
-    /* ── Slide layout helpers ─────────────────────────────────────── */
-    .slide-two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.6em;
-      margin-top: 0.6em;
-    }
-    .slide-two-col-wide {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 1.6em;
-      margin-top: 0.6em;
-    }
-    .slide-three-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 1.2em;
-      margin-top: 0.6em;
-    }
+  /* ── slide chrome ── */
+  .slide-hdr {
+    display: flex; align-items: center; gap: .4em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: .2em; margin-bottom: .3em;
+  }
+  .slide-hdr .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .42em; font-weight: 500;
+    color: var(--bg); background: var(--amber);
+    padding: .1em .4em; border-radius: 3px;
+    letter-spacing: .04em;
+  }
+  .slide-hdr h2 { margin: 0; font-size: .95em; }
 
-    /* ── Cards ────────────────────────────────────────────────────── */
-    .card {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1em 1.2em;
-    }
-    .card-amber { border-left: 3px solid var(--amber); }
-    .card-green { border-left: 3px solid var(--green); }
-    .card-purple { border-left: 3px solid var(--purple); }
+  /* ── two-column ── */
+  .cols   { display: grid; gap: .5em; }
+  .cols-2 { grid-template-columns: 1fr 1fr; }
+  .cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .cols-6040 { grid-template-columns: 6fr 4fr; }
+  .cols-4060 { grid-template-columns: 4fr 6fr; }
 
-    /* ── Pill badges ─────────────────────────────────────────────── */
-    .pill {
-      display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.52em;
-      padding: 0.15em 0.6em;
-      border-radius: 2em;
-      margin: 0.1em;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-    .pill-amber  { background: #2e1e00; color: var(--amber);  border: 1px solid var(--amber-dim); }
-    .pill-green  { background: #001e16; color: var(--green);  border: 1px solid var(--green-dim); }
-    .pill-purple { background: #1a1030; color: var(--purple); border: 1px solid var(--purple-dim); }
-    .pill-red    { background: #1e0808; color: #f87171; border: 1px solid #9b2020; }
+  /* ── cards ── */
+  .card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 6px; padding: .35em .6em;
+  }
+  .card.amber { border-left: 3px solid var(--amber); }
+  .card.green { border-left: 3px solid var(--green); }
+  .card.purple{ border-left: 3px solid var(--purple); }
+  .card.blue  { border-left: 3px solid var(--blue); }
+  .card.red   { border-left: 3px solid var(--red); }
+  .card h3 { font-size: .64em; margin: 0 0 .12em; }
+  .card p  { font-size: .52em; margin: 0; color: #b8b8d0; }
+  .card ul { margin: 0; padding-left: 1em; }
+  .card li { font-size: .52em; color: #b8b8d0; margin-bottom: .02em; }
 
-    /* ── Tables ──────────────────────────────────────────────────── */
-    .reveal table {
-      font-size: 0.60em;
-      width: 100%;
-      border-collapse: collapse;
-      margin: 0.6em 0;
-    }
-    .reveal table th {
-      background: var(--bg3);
-      color: var(--amber);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 600;
-      padding: 0.5em 0.8em;
-      border: 1px solid var(--border);
-      text-align: left;
-    }
-    .reveal table td {
-      padding: 0.45em 0.8em;
-      border: 1px solid var(--border);
-      color: var(--text);
-      vertical-align: top;
-    }
-    .reveal table tr:nth-child(even) td { background: #111120; }
+  /* ── table ── */
+  .reveal table { width: 100%; border-collapse: collapse; font-size: .5em; }
+  .reveal table th { background: var(--bg3); color: var(--amber); font-weight: 600;
+                     padding: .2em .4em; border: 1px solid var(--border); text-align: left; }
+  .reveal table td { padding: .18em .4em; border: 1px solid var(--border); color: #ccc; }
+  .reveal table tr:nth-child(even) td { background: #0e0e18; }
 
-    /* ── Section title slides ─────────────────────────────────────── */
-    .section-banner {
-      background: linear-gradient(135deg, #0f0f1f 0%, #1a1030 100%);
-      border: 1px solid var(--purple-dim);
-      border-radius: 10px;
-      padding: 1.5em 2em;
-      margin: 0.5em 0;
-    }
-    .section-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.55em;
-      color: var(--purple);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
+  /* ── accent spans ── */
+  .a  { color: var(--amber); font-weight: 600; }
+  .g  { color: var(--green); font-weight: 600; }
+  .p  { color: var(--purple); font-weight: 600; }
+  .b  { color: var(--blue); font-weight: 600; }
+  .r  { color: var(--red); font-weight: 600; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
 
-    /* ── Diagram / SVG containers ──────────────────────────────────── */
-    .diagram-box {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 0.5em;
-      margin: 0.4em 0;
-    }
+  /* ── SVG graph diagrams ── */
+  svg.diagram { display: block; margin: 0 auto; overflow: visible; }
 
-    /* ── Key-value highlight rows ─────────────────────────────────── */
-    .kv-row {
-      display: flex;
-      gap: 0.6em;
-      align-items: baseline;
-      font-size: 0.66em;
-      margin: 0.3em 0;
-    }
-    .kv-key {
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--amber);
-      min-width: 9em;
-      font-size: 0.9em;
-    }
-    .kv-val { color: var(--text); }
+  /* ── pill badges ── */
+  .pill {
+    display: inline-block; font-family: 'JetBrains Mono', monospace;
+    font-size: .44em; padding: .08em .4em; border-radius: 99px;
+    border: 1px solid; margin: 0 .08em;
+  }
+  .pill.amber { color: var(--amber); border-color: var(--amber); }
+  .pill.green { color: var(--green); border-color: var(--green); }
+  .pill.purple{ color: var(--purple); border-color: var(--purple); }
+  .pill.blue  { color: var(--blue); border-color: var(--blue); }
 
-    /* ── Callout box ──────────────────────────────────────────────── */
-    .callout {
-      background: #0e1a14;
-      border: 1px solid var(--green-dim);
-      border-left: 3px solid var(--green);
-      border-radius: 6px;
-      padding: 0.6em 1em;
-      font-size: 0.65em;
-      color: var(--text);
-      margin: 0.6em 0;
-    }
-    .callout-amber {
-      background: #1a1000;
-      border-color: var(--amber-dim);
-      border-left-color: var(--amber);
-    }
-    .callout-purple {
-      background: #110e1f;
-      border-color: var(--purple-dim);
-      border-left-color: var(--purple);
-    }
+  /* ── footer — hidden ── */
+  .reveal .slide-footer { display: none; }
+  /* title slide special */
+  .title-slide h1 { font-size: 1.8em; }
+  .title-slide .subtitle {
+    font-size: .7em; color: var(--green); font-family: 'DM Sans', sans-serif;
+    font-weight: 300; letter-spacing: .04em; margin: .3em 0 .6em;
+  }
+  .title-slide .meta { font-size: .48em; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
 
-    /* ── Title slide ──────────────────────────────────────────────── */
-    .title-eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.38em;
-      color: var(--green);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 0.6em;
-    }
-    .title-subtitle {
-      font-size: 0.52em;
-      color: var(--text-dim);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      margin-top: 0.8em;
-      line-height: 1.6;
-    }
-    .title-meta {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.35em;
-      color: var(--text-dim);
-      margin-top: 2em;
-      letter-spacing: 0.08em;
-    }
+  /* ── super-step animator ── */
+  .ss-row {
+    display: flex; gap: .25em; align-items: center;
+    margin: .1em 0; font-size: .55em; font-family: 'JetBrains Mono', monospace;
+  }
+  .ss-node {
+    padding: .2em .55em; border-radius: 5px; font-size: .9em;
+    background: var(--bg3); border: 1px solid var(--border); color: var(--text);
+  }
+  .ss-node.active { background: #1a2a1a; border-color: var(--green); color: var(--green); }
+  .ss-node.done   { background: #1a1a2a; border-color: var(--purple); color: var(--purple); }
+  .ss-arrow { color: var(--amber); }
+  .ss-label { font-size: .8em; color: var(--muted); margin-left: .3em; }
 
-    /* ── Progress accent line ─────────────────────────────────────── */
-    .reveal .progress { background: #1a1a2e; height: 3px; }
-    .reveal .progress span { background: var(--amber); }
-    .reveal .controls { color: var(--amber); }
-    .reveal .slide-number { color: var(--text-dim); font-family: 'JetBrains Mono', monospace; font-size: 0.55em; }
-
-    /* ── ACID / NORM boxes ────────────────────────────────────────── */
-    .prop-box {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4em;
-    }
-    .prop-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.7em;
-      background: var(--bg3);
-      border-radius: 6px;
-      padding: 0.45em 0.8em;
-      font-size: 0.62em;
-      border: 1px solid var(--border);
-    }
-    .prop-letter {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4em;
-      font-weight: 700;
-      min-width: 0.9em;
-      line-height: 1;
-    }
-    .prop-text { color: var(--text); line-height: 1.5; }
-    .prop-text strong { color: var(--amber); }
-
-    /* ── Index card (glossary / comparison) ──────────────────────── */
-    .idx-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.8em;
-      margin: 0.3em 0;
-    }
-
-    /* ── Fade fragments ───────────────────────────────────────────── */
-    .reveal .fragment { opacity: 0.15; }
-    .reveal .fragment.visible { opacity: 1; }
-  .reveal .slides > section { overflow-y: auto !important; align-items: flex-start !important; justify-content: flex-start !important; }
+  /* reduce default margins */
+  .reveal ul, .reveal ol { margin: .15em 0 .15em 1em; }
+.reveal .slides > section { display: flex !important; flex-direction: column !important; overflow-y: auto !important; align-items: stretch !important; justify-content: flex-start !important; }
 </style>
 </head>
 <body>
@@ -274,14 +144,15 @@
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 01 — Title
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <div class="title-eyebrow">Modern Software Architecture Series</div>
-  <h1>Introduction to<br/>Databases</h1>
-  <div class="title-subtitle">
-    Relational theory · SQL fundamentals · Transactions & ACID ·<br/>
+<section class="title-slide" data-background-color="#0a0a0f">
+  <div style="font-family:'JetBrains Mono',monospace; font-size:.5em; color:var(--muted); margin-bottom:.4em; letter-spacing:.1em;">MODERN SOFTWARE ARCHITECTURE SERIES</div>
+  <h1>Introduction to<br>Databases</h1>
+  <div class="subtitle">
+    Relational theory · SQL fundamentals · Transactions & ACID ·<br>
     Indexing & query optimisation · NoSQL models · Choosing the right engine
   </div>
-  <div class="title-meta">
+  <div style="width:60px; height:3px; background:var(--amber); margin-bottom:1.4em;"></div>
+  <div class="meta">
     Mid-level software engineer track &nbsp;·&nbsp; 22 slides
   </div>
 </section>
@@ -289,9 +160,12 @@
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 02 — Why Databases?
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>Why Dedicated Databases?</h2>
-  <div class="slide-two-col">
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">02</span>
+    <h2>Why Dedicated Databases?</h2>
+  </div>
+  <div class="cols cols-2">
     <div>
       <h3>The naive alternative</h3>
       <p>Flat files (CSV, JSON on disk) seem appealing for small data sets, but quickly expose hard limits:</p>
@@ -305,26 +179,26 @@
     </div>
     <div>
       <h3>What a DBMS provides</h3>
-      <div class="prop-box" style="margin-top:0.3em">
-        <div class="prop-item">
-          <span class="prop-letter" style="color:var(--amber)">📁</span>
-          <span class="prop-text"><strong>Persistent, structured storage</strong> — schema + types enforced at write time</span>
+      <div style="display:flex; flex-direction:column; gap:.3em; margin-top:0.3em">
+        <div style="display:flex; align-items:flex-start; gap:.5em; background:var(--bg3); border-radius:6px; padding:.35em .6em; font-size:.52em; border:1px solid var(--border);">
+          <span style="font-family:'Playfair Display',serif; font-size:1.4em; font-weight:700; min-width:0.9em; line-height:1; color:var(--amber)">📁</span>
+          <span style="color:var(--text); line-height:1.5"><strong style="color:var(--amber)">Persistent, structured storage</strong> — schema + types enforced at write time</span>
         </div>
-        <div class="prop-item">
-          <span class="prop-letter" style="color:var(--green)">⚡</span>
-          <span class="prop-text"><strong>Efficient retrieval</strong> — indexes shrink large scans to sub-millisecond lookups</span>
+        <div style="display:flex; align-items:flex-start; gap:.5em; background:var(--bg3); border-radius:6px; padding:.35em .6em; font-size:.52em; border:1px solid var(--border);">
+          <span style="font-family:'Playfair Display',serif; font-size:1.4em; font-weight:700; min-width:0.9em; line-height:1; color:var(--green)">⚡</span>
+          <span style="color:var(--text); line-height:1.5"><strong style="color:var(--amber)">Efficient retrieval</strong> — indexes shrink large scans to sub-millisecond lookups</span>
         </div>
-        <div class="prop-item">
-          <span class="prop-letter" style="color:var(--purple)">🔒</span>
-          <span class="prop-text"><strong>Concurrency control</strong> — isolation prevents reads seeing partial writes</span>
+        <div style="display:flex; align-items:flex-start; gap:.5em; background:var(--bg3); border-radius:6px; padding:.35em .6em; font-size:.52em; border:1px solid var(--border);">
+          <span style="font-family:'Playfair Display',serif; font-size:1.4em; font-weight:700; min-width:0.9em; line-height:1; color:var(--purple)">🔒</span>
+          <span style="color:var(--text); line-height:1.5"><strong style="color:var(--amber)">Concurrency control</strong> — isolation prevents reads seeing partial writes</span>
         </div>
-        <div class="prop-item">
-          <span class="prop-letter" style="color:var(--amber)">🔄</span>
-          <span class="prop-text"><strong>Recovery</strong> — write-ahead logging survives crashes with zero data loss</span>
+        <div style="display:flex; align-items:flex-start; gap:.5em; background:var(--bg3); border-radius:6px; padding:.35em .6em; font-size:.52em; border:1px solid var(--border);">
+          <span style="font-family:'Playfair Display',serif; font-size:1.4em; font-weight:700; min-width:0.9em; line-height:1; color:var(--amber)">🔄</span>
+          <span style="color:var(--text); line-height:1.5"><strong style="color:var(--amber)">Recovery</strong> — write-ahead logging survives crashes with zero data loss</span>
         </div>
-        <div class="prop-item">
-          <span class="prop-letter" style="color:var(--green)">🔑</span>
-          <span class="prop-text"><strong>Access control</strong> — row/column security, roles, audit trails</span>
+        <div style="display:flex; align-items:flex-start; gap:.5em; background:var(--bg3); border-radius:6px; padding:.35em .6em; font-size:.52em; border:1px solid var(--border);">
+          <span style="font-family:'Playfair Display',serif; font-size:1.4em; font-weight:700; min-width:0.9em; line-height:1; color:var(--green)">🔑</span>
+          <span style="color:var(--text); line-height:1.5"><strong style="color:var(--amber)">Access control</strong> — row/column security, roles, audit trails</span>
         </div>
       </div>
     </div>
@@ -334,69 +208,75 @@
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 03 — Taxonomy
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>Database Taxonomy</h2>
-  <div class="slide-three-col" style="margin-top:0.5em">
-    <div class="card card-amber">
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">03</span>
+    <h2>Database Taxonomy</h2>
+  </div>
+  <div class="cols cols-3" style="margin-top:0.5em">
+    <div class="card amber">
       <h3>Relational (RDBMS)</h3>
       <p>Data in tables with typed columns. Relationships via foreign keys. Query via SQL.</p>
       <div style="margin-top:0.5em">
-        <span class="pill pill-amber">PostgreSQL</span>
-        <span class="pill pill-amber">MySQL</span>
-        <span class="pill pill-amber">SQLite</span>
-        <span class="pill pill-amber">Oracle</span>
-        <span class="pill pill-amber">SQL Server</span>
+        <span class="pill amber">PostgreSQL</span>
+        <span class="pill amber">MySQL</span>
+        <span class="pill amber">SQLite</span>
+        <span class="pill amber">Oracle</span>
+        <span class="pill amber">SQL Server</span>
       </div>
-      <p style="margin-top:0.7em;font-size:0.6em;color:var(--text-dim)">Default choice for most transactional workloads</p>
+      <p style="margin-top:0.7em;font-size:0.6em;color:var(--muted)">Default choice for most transactional workloads</p>
     </div>
-    <div class="card card-green">
+    <div class="card green">
       <h3>NoSQL</h3>
       <p>Schema-flexible alternatives optimised for different data shapes or access patterns.</p>
       <div style="margin-top:0.5em">
-        <span class="pill pill-green">Document</span>
-        <span class="pill pill-green">Key-Value</span>
-        <span class="pill pill-green">Wide-Column</span>
-        <span class="pill pill-green">Graph</span>
+        <span class="pill green">Document</span>
+        <span class="pill green">Key-Value</span>
+        <span class="pill green">Wide-Column</span>
+        <span class="pill green">Graph</span>
       </div>
-      <p style="margin-top:0.7em;font-size:0.6em;color:var(--text-dim)">MongoDB · Redis · Cassandra · Neo4j</p>
+      <p style="margin-top:0.7em;font-size:0.6em;color:var(--muted)">MongoDB · Redis · Cassandra · Neo4j</p>
     </div>
-    <div class="card card-purple">
+    <div class="card purple">
       <h3>NewSQL / Hybrid</h3>
       <p>ACID guarantees with horizontal scale-out — bridging relational and distributed models.</p>
       <div style="margin-top:0.5em">
-        <span class="pill pill-purple">CockroachDB</span>
-        <span class="pill pill-purple">Spanner</span>
-        <span class="pill pill-purple">TiDB</span>
-        <span class="pill pill-purple">YugabyteDB</span>
+        <span class="pill purple">CockroachDB</span>
+        <span class="pill purple">Spanner</span>
+        <span class="pill purple">TiDB</span>
+        <span class="pill purple">YugabyteDB</span>
       </div>
-      <p style="margin-top:0.7em;font-size:0.6em;color:var(--text-dim)">Emerging default for global transactional apps</p>
+      <p style="margin-top:0.7em;font-size:0.6em;color:var(--muted)">Emerging default for global transactional apps</p>
     </div>
   </div>
-  <div class="callout-amber callout" style="margin-top:0.8em">
-    <strong>Rule of thumb:</strong> start with a relational database. Migrate to a specialised store only when you have a concrete, measured reason — not speculation.
+  <div class="card amber" style="margin-top:0.8em">
+    <p><strong style="color:var(--amber)">Rule of thumb:</strong> start with a relational database. Migrate to a specialised store only when you have a concrete, measured reason — not speculation.</p>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 04 — Relational Model
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>The Relational Model</h2>
-  <div class="slide-two-col-wide">
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">04</span>
+    <h2>The Relational Model</h2>
+  </div>
+  <div class="cols cols-6040">
     <div>
       <p>Codd's 1970 model remains the foundation. Core concepts:</p>
-      <div class="kv-row"><span class="kv-key">Relation</span><span class="kv-val">A named table — a set of tuples sharing a schema</span></div>
-      <div class="kv-row"><span class="kv-key">Tuple</span><span class="kv-val">One row — an ordered list of typed attribute values</span></div>
-      <div class="kv-row"><span class="kv-key">Attribute</span><span class="kv-val">A named column with a domain (type constraint)</span></div>
-      <div class="kv-row"><span class="kv-key">Primary key</span><span class="kv-val">Minimal set of attributes that uniquely identify a tuple</span></div>
-      <div class="kv-row"><span class="kv-key">Foreign key</span><span class="kv-val">Attribute referencing a primary key in another relation — enforces referential integrity</span></div>
-      <div class="kv-row"><span class="kv-key">Domain</span><span class="kv-val">Valid value set for an attribute: <code>INTEGER</code>, <code>VARCHAR(255)</code>, <code>TIMESTAMP</code>, …</span></div>
-      <div class="callout" style="margin-top:0.8em">
-        Tables are <em>sets</em> (unordered, no duplicates). SQL adds bags (multisets) for performance, but the relational spirit is set-based.
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Relation</span><span style="color:var(--text)">A named table — a set of tuples sharing a schema</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Tuple</span><span style="color:var(--text)">One row — an ordered list of typed attribute values</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Attribute</span><span style="color:var(--text)">A named column with a domain (type constraint)</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Primary key</span><span style="color:var(--text)">Minimal set of attributes that uniquely identify a tuple</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Foreign key</span><span style="color:var(--text)">Attribute referencing a primary key in another relation — enforces referential integrity</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Domain</span><span style="color:var(--text)">Valid value set for an attribute: <code>INTEGER</code>, <code>VARCHAR(255)</code>, <code>TIMESTAMP</code>, …</span></div>
+      <div class="card blue" style="margin-top:0.8em">
+        <p>Tables are <em>sets</em> (unordered, no duplicates). SQL adds bags (multisets) for performance, but the relational spirit is set-based.</p>
       </div>
     </div>
     <div>
-      <div class="diagram-box">
+      <div style="background:var(--bg2); border:1px solid var(--border); border-radius:6px; padding:.5em;">
         <!-- Simple SVG schema diagram -->
         <svg viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
           <defs>
@@ -454,9 +334,12 @@
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 05 — SQL Fundamentals
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>SQL Fundamentals</h2>
-  <div class="slide-two-col">
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">05</span>
+    <h2>SQL Fundamentals</h2>
+  </div>
+  <div class="cols cols-2">
     <div>
       <h3>Data sub-languages</h3>
       <table>
@@ -466,8 +349,8 @@
         <tr><td><strong>DCL</strong> — Control</td><td><code>GRANT</code>, <code>REVOKE</code></td></tr>
         <tr><td><strong>TCL</strong> — Transaction</td><td><code>BEGIN</code>, <code>COMMIT</code>, <code>ROLLBACK</code></td></tr>
       </table>
-      <div class="callout" style="margin-top:0.7em">
-        SQL is <em>declarative</em> — you describe <strong>what</strong> you want, not how to retrieve it. The query planner decides the execution strategy.
+      <div class="card blue" style="margin-top:0.7em">
+        <p>SQL is <em>declarative</em> — you describe <strong style="color:var(--amber)">what</strong> you want, not how to retrieve it. The query planner decides the execution strategy.</p>
       </div>
     </div>
     <div>
@@ -484,7 +367,7 @@ GROUP  BY u.username
 HAVING SUM(o.total) > 500
 ORDER  BY lifetime_value DESC
 LIMIT  20;</code></pre>
-      <p style="font-size:0.58em;color:var(--text-dim)">Logical evaluation order: <code>FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT</code></p>
+      <p style="font-size:0.58em;color:var(--muted)">Logical evaluation order: <code>FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT</code></p>
     </div>
   </div>
 </section>
@@ -492,9 +375,12 @@ LIMIT  20;</code></pre>
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 06 — JOINs
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>JOIN Types</h2>
-  <div class="slide-two-col">
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">06</span>
+    <h2>JOIN Types</h2>
+  </div>
+  <div class="cols cols-2">
     <div>
       <table>
         <tr><th>JOIN type</th><th>Returns</th></tr>
@@ -505,12 +391,12 @@ LIMIT  20;</code></pre>
         <tr><td><code>CROSS JOIN</code></td><td>Cartesian product — every combination</td></tr>
         <tr><td><code>SELF JOIN</code></td><td>Table joined to itself via alias</td></tr>
       </table>
-      <div class="callout-amber callout" style="margin-top:0.7em">
-        Most production queries use <code>INNER JOIN</code> or <code>LEFT JOIN</code>. <code>CROSS JOIN</code> on large tables can produce billions of rows — use with intention.
+      <div class="card amber" style="margin-top:0.7em">
+        <p>Most production queries use <code>INNER JOIN</code> or <code>LEFT JOIN</code>. <code>CROSS JOIN</code> on large tables can produce billions of rows — use with intention.</p>
       </div>
     </div>
     <div>
-      <div class="diagram-box">
+      <div style="background:var(--bg2); border:1px solid var(--border); border-radius:6px; padding:.5em;">
         <!-- Venn-style JOIN diagram SVG -->
         <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
           <!-- INNER -->
@@ -573,37 +459,40 @@ LIMIT  20;</code></pre>
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 07 — Normalisation
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>Normalisation</h2>
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">07</span>
+    <h2>Normalisation</h2>
+  </div>
   <p>A process of decomposing tables to eliminate redundancy and update anomalies — formalised as a progression of <em>Normal Forms</em> (NF).</p>
-  <div class="slide-two-col" style="margin-top:0.5em">
-    <div class="prop-box">
-      <div class="prop-item">
-        <span class="prop-letter" style="color:var(--amber)">1NF</span>
-        <span class="prop-text"><strong>Atomic values only.</strong> No repeating groups, no comma-delimited lists in a single cell. Each column holds one indivisible value.</span>
+  <div class="cols cols-2" style="margin-top:0.5em">
+    <div style="display:flex; flex-direction:column; gap:.3em;">
+      <div style="display:flex; align-items:flex-start; gap:.5em; background:var(--bg3); border-radius:6px; padding:.35em .6em; font-size:.52em; border:1px solid var(--border);">
+        <span style="font-family:'Playfair Display',serif; font-size:1.4em; font-weight:700; min-width:0.9em; line-height:1; color:var(--amber)">1NF</span>
+        <span style="color:var(--text); line-height:1.5"><strong style="color:var(--amber)">Atomic values only.</strong> No repeating groups, no comma-delimited lists in a single cell. Each column holds one indivisible value.</span>
       </div>
-      <div class="prop-item">
-        <span class="prop-letter" style="color:var(--amber)">2NF</span>
-        <span class="prop-text"><strong>1NF + no partial dependency.</strong> Every non-key attribute depends on the <em>whole</em> primary key (matters for composite PKs).</span>
+      <div style="display:flex; align-items:flex-start; gap:.5em; background:var(--bg3); border-radius:6px; padding:.35em .6em; font-size:.52em; border:1px solid var(--border);">
+        <span style="font-family:'Playfair Display',serif; font-size:1.4em; font-weight:700; min-width:0.9em; line-height:1; color:var(--amber)">2NF</span>
+        <span style="color:var(--text); line-height:1.5"><strong style="color:var(--amber)">1NF + no partial dependency.</strong> Every non-key attribute depends on the <em>whole</em> primary key (matters for composite PKs).</span>
       </div>
-      <div class="prop-item">
-        <span class="prop-letter" style="color:var(--amber)">3NF</span>
-        <span class="prop-text"><strong>2NF + no transitive dependency.</strong> No non-key column determines another non-key column. "Every fact depends on the key, the whole key, and nothing but the key."</span>
+      <div style="display:flex; align-items:flex-start; gap:.5em; background:var(--bg3); border-radius:6px; padding:.35em .6em; font-size:.52em; border:1px solid var(--border);">
+        <span style="font-family:'Playfair Display',serif; font-size:1.4em; font-weight:700; min-width:0.9em; line-height:1; color:var(--amber)">3NF</span>
+        <span style="color:var(--text); line-height:1.5"><strong style="color:var(--amber)">2NF + no transitive dependency.</strong> No non-key column determines another non-key column. "Every fact depends on the key, the whole key, and nothing but the key."</span>
       </div>
-      <div class="prop-item">
-        <span class="prop-letter" style="color:var(--amber)">BCNF</span>
-        <span class="prop-text"><strong>Stricter 3NF.</strong> Every determinant must be a superkey. Handles edge cases with overlapping candidate keys.</span>
+      <div style="display:flex; align-items:flex-start; gap:.5em; background:var(--bg3); border-radius:6px; padding:.35em .6em; font-size:.52em; border:1px solid var(--border);">
+        <span style="font-family:'Playfair Display',serif; font-size:1.4em; font-weight:700; min-width:0.9em; line-height:1; color:var(--amber)">BCNF</span>
+        <span style="color:var(--text); line-height:1.5"><strong style="color:var(--amber)">Stricter 3NF.</strong> Every determinant must be a superkey. Handles edge cases with overlapping candidate keys.</span>
       </div>
     </div>
     <div>
-      <div class="callout-purple callout">
-        <strong>Anomalies prevented by normalisation:</strong><br/>
-        <strong>Insertion</strong> — can't add a new fact without inserting a full row<br/>
-        <strong>Update</strong> — changing a value requires updating it in many rows<br/>
-        <strong>Deletion</strong> — deleting the last row about an entity destroys unrelated data
+      <div class="card purple">
+        <p><strong style="color:var(--amber)">Anomalies prevented by normalisation:</strong><br>
+        <strong style="color:var(--amber)">Insertion</strong> — can't add a new fact without inserting a full row<br>
+        <strong style="color:var(--amber)">Update</strong> — changing a value requires updating it in many rows<br>
+        <strong style="color:var(--amber)">Deletion</strong> — deleting the last row about an entity destroys unrelated data</p>
       </div>
-      <div class="callout-amber callout" style="margin-top:0.6em">
-        <strong>Denormalisation</strong> is valid — deliberately adding redundancy to reduce joins in read-heavy workloads. Profile before denormalising; 3NF is usually fast enough.
+      <div class="card amber" style="margin-top:0.6em">
+        <p><strong style="color:var(--amber)">Denormalisation</strong> is valid — deliberately adding redundancy to reduce joins in read-heavy workloads. Profile before denormalising; 3NF is usually fast enough.</p>
       </div>
     </div>
   </div>
@@ -612,37 +501,43 @@ LIMIT  20;</code></pre>
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 08 — ACID
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>ACID Transactions</h2>
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">08</span>
+    <h2>ACID Transactions</h2>
+  </div>
   <p>A <em>transaction</em> is a logical unit of work that must succeed entirely or have no effect at all.</p>
-  <div class="prop-box" style="margin-top:0.6em">
-    <div class="prop-item">
-      <span class="prop-letter" style="color:var(--amber)">A</span>
-      <span class="prop-text"><strong>Atomicity — all or nothing.</strong> If any statement in the transaction fails, every preceding change is rolled back. Implemented via undo logs.</span>
+  <div style="display:flex; flex-direction:column; gap:.3em; margin-top:0.6em">
+    <div style="display:flex; align-items:flex-start; gap:.5em; background:var(--bg3); border-radius:6px; padding:.35em .6em; font-size:.52em; border:1px solid var(--border);">
+      <span style="font-family:'Playfair Display',serif; font-size:1.4em; font-weight:700; min-width:0.9em; line-height:1; color:var(--amber)">A</span>
+      <span style="color:var(--text); line-height:1.5"><strong style="color:var(--amber)">Atomicity — all or nothing.</strong> If any statement in the transaction fails, every preceding change is rolled back. Implemented via undo logs.</span>
     </div>
-    <div class="prop-item">
-      <span class="prop-letter" style="color:var(--green)">C</span>
-      <span class="prop-text"><strong>Consistency — valid state to valid state.</strong> The transaction must satisfy all integrity constraints (NOT NULL, FK, CHECK) at commit time.</span>
+    <div style="display:flex; align-items:flex-start; gap:.5em; background:var(--bg3); border-radius:6px; padding:.35em .6em; font-size:.52em; border:1px solid var(--border);">
+      <span style="font-family:'Playfair Display',serif; font-size:1.4em; font-weight:700; min-width:0.9em; line-height:1; color:var(--green)">C</span>
+      <span style="color:var(--text); line-height:1.5"><strong style="color:var(--amber)">Consistency — valid state to valid state.</strong> The transaction must satisfy all integrity constraints (NOT NULL, FK, CHECK) at commit time.</span>
     </div>
-    <div class="prop-item">
-      <span class="prop-letter" style="color:var(--purple)">I</span>
-      <span class="prop-text"><strong>Isolation — concurrent transactions don't see each other's partial changes.</strong> Configured via isolation levels (READ COMMITTED, REPEATABLE READ, SERIALIZABLE).</span>
+    <div style="display:flex; align-items:flex-start; gap:.5em; background:var(--bg3); border-radius:6px; padding:.35em .6em; font-size:.52em; border:1px solid var(--border);">
+      <span style="font-family:'Playfair Display',serif; font-size:1.4em; font-weight:700; min-width:0.9em; line-height:1; color:var(--purple)">I</span>
+      <span style="color:var(--text); line-height:1.5"><strong style="color:var(--amber)">Isolation — concurrent transactions don't see each other's partial changes.</strong> Configured via isolation levels (READ COMMITTED, REPEATABLE READ, SERIALIZABLE).</span>
     </div>
-    <div class="prop-item">
-      <span class="prop-letter" style="color:var(--amber)">D</span>
-      <span class="prop-text"><strong>Durability — committed data survives crashes.</strong> Achieved with write-ahead logging (WAL): changes written to a sequential log before touching the data pages.</span>
+    <div style="display:flex; align-items:flex-start; gap:.5em; background:var(--bg3); border-radius:6px; padding:.35em .6em; font-size:.52em; border:1px solid var(--border);">
+      <span style="font-family:'Playfair Display',serif; font-size:1.4em; font-weight:700; min-width:0.9em; line-height:1; color:var(--amber)">D</span>
+      <span style="color:var(--text); line-height:1.5"><strong style="color:var(--amber)">Durability — committed data survives crashes.</strong> Achieved with write-ahead logging (WAL): changes written to a sequential log before touching the data pages.</span>
     </div>
   </div>
-  <div class="callout" style="margin-top:0.7em">
-    <code>BEGIN;</code> &nbsp;…statements…&nbsp; <code>COMMIT;</code> — explicit transaction boundaries. Most ORMs wrap each statement in an implicit transaction unless you open one explicitly.
+  <div class="card blue" style="margin-top:0.7em">
+    <p><code>BEGIN;</code> &nbsp;…statements…&nbsp; <code>COMMIT;</code> — explicit transaction boundaries. Most ORMs wrap each statement in an implicit transaction unless you open one explicitly.</p>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 09 — Isolation Levels
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>Isolation Levels & Read Phenomena</h2>
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">09</span>
+    <h2>Isolation Levels & Read Phenomena</h2>
+  </div>
   <table>
     <tr>
       <th>Isolation Level</th>
@@ -680,15 +575,15 @@ LIMIT  20;</code></pre>
       <td>Financial, inventory; highest contention</td>
     </tr>
   </table>
-  <div class="slide-three-col" style="margin-top:0.6em">
-    <div class="callout callout-amber">
-      <strong>Dirty Read</strong><br/>Reading uncommitted changes from another transaction — never safe.
+  <div class="cols cols-3" style="margin-top:0.6em">
+    <div class="card amber">
+      <p><strong style="color:var(--amber)">Dirty Read</strong><br>Reading uncommitted changes from another transaction — never safe.</p>
     </div>
-    <div class="callout callout-amber">
-      <strong>Non-Repeatable Read</strong><br/>Same row read twice in one transaction returns different values.
+    <div class="card amber">
+      <p><strong style="color:var(--amber)">Non-Repeatable Read</strong><br>Same row read twice in one transaction returns different values.</p>
     </div>
-    <div class="callout callout-amber">
-      <strong>Phantom Read</strong><br/>A range query returns different rows across two reads in one transaction.
+    <div class="card amber">
+      <p><strong style="color:var(--amber)">Phantom Read</strong><br>A range query returns different rows across two reads in one transaction.</p>
     </div>
   </div>
 </section>
@@ -696,15 +591,18 @@ LIMIT  20;</code></pre>
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 10 — Indexing
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>Indexing</h2>
-  <div class="slide-two-col">
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">10</span>
+    <h2>Indexing</h2>
+  </div>
+  <div class="cols cols-2">
     <div>
       <h3>Why indexes?</h3>
       <p>A table scan is <code>O(n)</code>. A B-tree index lookup is <code>O(log n)</code>. At one million rows that is ~20 comparisons vs 1,000,000.</p>
       <h3>B-tree index (default)</h3>
       <p>Balanced tree structure. Maintains sorted order on the indexed column(s). Excellent for equality, range, prefix, and ORDER BY queries.</p>
-      <div class="diagram-box" style="margin-top:0.4em">
+      <div style="background:var(--bg2); border:1px solid var(--border); border-radius:6px; padding:.5em; margin-top:0.4em">
         <svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
           <!-- Root -->
           <rect x="120" y="8" width="80" height="24" rx="4" fill="#1a1a28" stroke="#f5a623" stroke-width="1.2"/>
@@ -755,14 +653,14 @@ LIMIT  20;</code></pre>
     </div>
     <div>
       <h3>Index types</h3>
-      <div class="kv-row"><span class="kv-key">B-tree</span><span class="kv-val">Equality &amp; range; default in Postgres, MySQL</span></div>
-      <div class="kv-row"><span class="kv-key">Hash</span><span class="kv-val">Equality only; faster for exact match, no range</span></div>
-      <div class="kv-row"><span class="kv-key">GIN</span><span class="kv-val">Arrays, JSONB, full-text search (Postgres)</span></div>
-      <div class="kv-row"><span class="kv-key">GiST / SP-GiST</span><span class="kv-val">Geospatial, geometric, nearest-neighbour</span></div>
-      <div class="kv-row"><span class="kv-key">Partial</span><span class="kv-val">Indexes only rows matching a WHERE predicate — smaller, faster</span></div>
-      <div class="kv-row"><span class="kv-key">Covering</span><span class="kv-val">Includes all columns the query needs — heap access avoided entirely (index-only scan)</span></div>
-      <div class="callout-amber callout" style="margin-top:0.8em">
-        <strong>Index costs:</strong> every write must update all indexes on that table. Over-indexing slows INSERTs/UPDATEs. Profile and add indexes in response to slow queries, not pre-emptively.
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">B-tree</span><span style="color:var(--text)">Equality &amp; range; default in Postgres, MySQL</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Hash</span><span style="color:var(--text)">Equality only; faster for exact match, no range</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">GIN</span><span style="color:var(--text)">Arrays, JSONB, full-text search (Postgres)</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">GiST / SP-GiST</span><span style="color:var(--text)">Geospatial, geometric, nearest-neighbour</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Partial</span><span style="color:var(--text)">Indexes only rows matching a WHERE predicate — smaller, faster</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Covering</span><span style="color:var(--text)">Includes all columns the query needs — heap access avoided entirely (index-only scan)</span></div>
+      <div class="card amber" style="margin-top:0.8em">
+        <p><strong style="color:var(--amber)">Index costs:</strong> every write must update all indexes on that table. Over-indexing slows INSERTs/UPDATEs. Profile and add indexes in response to slow queries, not pre-emptively.</p>
       </div>
     </div>
   </div>
@@ -771,9 +669,12 @@ LIMIT  20;</code></pre>
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 11 — Query Planning
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>Query Planning & EXPLAIN</h2>
-  <div class="slide-two-col">
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">11</span>
+    <h2>Query Planning & EXPLAIN</h2>
+  </div>
+  <div class="cols cols-2">
     <div>
       <p>The query planner transforms SQL into a physical execution plan, choosing between sequential scans, index scans, join algorithms (hash, merge, nested loop), and parallel workers.</p>
       <pre><code class="sql">-- See the plan
@@ -784,19 +685,19 @@ WHERE user_id = 42;
 EXPLAIN (ANALYZE, BUFFERS)
 SELECT * FROM orders
 WHERE user_id = 42;</code></pre>
-      <div class="callout" style="margin-top:0.5em">
-        <strong>ANALYZE</strong> actually runs the query. Use on dev/staging, not production during peak load.
+      <div class="card blue" style="margin-top:0.5em">
+        <p><strong style="color:var(--amber)">ANALYZE</strong> actually runs the query. Use on dev/staging, not production during peak load.</p>
       </div>
     </div>
     <div>
       <h3>Plan node vocabulary</h3>
-      <div class="kv-row"><span class="kv-key">Seq Scan</span><span class="kv-val">Full table scan — fine for small tables or high-selectivity queries</span></div>
-      <div class="kv-row"><span class="kv-key">Index Scan</span><span class="kv-val">Traverse B-tree then fetch heap row for each match</span></div>
-      <div class="kv-row"><span class="kv-key">Index Only Scan</span><span class="kv-val">All needed columns in the index — zero heap I/O</span></div>
-      <div class="kv-row"><span class="kv-key">Bitmap Heap Scan</span><span class="kv-val">Batch-fetch heap pages after a bitmap index pass — good for medium selectivity</span></div>
-      <div class="kv-row"><span class="kv-key">Hash Join</span><span class="kv-val">Build hash table on smaller side; probe with larger — good for large equi-joins</span></div>
-      <div class="kv-row"><span class="kv-key">Merge Join</span><span class="kv-val">Merge two sorted inputs — efficient when both already indexed</span></div>
-      <div class="kv-row"><span class="kv-key">Nested Loop</span><span class="kv-val">For each outer row, scan inner — efficient when inner side is indexed and small</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Seq Scan</span><span style="color:var(--text)">Full table scan — fine for small tables or high-selectivity queries</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Index Scan</span><span style="color:var(--text)">Traverse B-tree then fetch heap row for each match</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Index Only Scan</span><span style="color:var(--text)">All needed columns in the index — zero heap I/O</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Bitmap Heap Scan</span><span style="color:var(--text)">Batch-fetch heap pages after a bitmap index pass — good for medium selectivity</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Hash Join</span><span style="color:var(--text)">Build hash table on smaller side; probe with larger — good for large equi-joins</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Merge Join</span><span style="color:var(--text)">Merge two sorted inputs — efficient when both already indexed</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Nested Loop</span><span style="color:var(--text)">For each outer row, scan inner — efficient when inner side is indexed and small</span></div>
     </div>
   </div>
 </section>
@@ -804,9 +705,12 @@ WHERE user_id = 42;</code></pre>
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 12 — Concurrency Control
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>Concurrency Control</h2>
-  <div class="slide-two-col">
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">12</span>
+    <h2>Concurrency Control</h2>
+  </div>
+  <div class="cols cols-2">
     <div>
       <h3>Pessimistic locking (2PL)</h3>
       <p>Acquire locks before accessing data; release at commit. Guarantees serializability but risks deadlock.</p>
@@ -819,8 +723,8 @@ FOR UPDATE;
 SELECT balance FROM accounts
 WHERE id = 1
 FOR SHARE;</code></pre>
-      <div class="callout-amber callout" style="margin-top:0.4em">
-        <strong>Deadlock</strong> — transaction A holds lock X and waits for Y; B holds Y and waits for X. The DBMS detects the cycle and aborts one party. Always acquire locks in a consistent order to prevent deadlocks.
+      <div class="card amber" style="margin-top:0.4em">
+        <p><strong style="color:var(--amber)">Deadlock</strong> — transaction A holds lock X and waits for Y; B holds Y and waits for X. The DBMS detects the cycle and aborts one party. Always acquire locks in a consistent order to prevent deadlocks.</p>
       </div>
     </div>
     <div>
@@ -832,8 +736,8 @@ FOR SHARE;</code></pre>
         <li>No read locks — readers never block writers and vice-versa</li>
         <li>Old versions are later vacuumed / purged</li>
       </ul>
-      <div class="callout" style="margin-top:0.5em">
-        MVCC makes <code>SELECT</code> essentially free in terms of locking cost. The trade-off is dead-tuple bloat — vacuum keeps this manageable.
+      <div class="card blue" style="margin-top:0.5em">
+        <p>MVCC makes <code>SELECT</code> essentially free in terms of locking cost. The trade-off is dead-tuple bloat — vacuum keeps this manageable.</p>
       </div>
     </div>
   </div>
@@ -842,13 +746,16 @@ FOR SHARE;</code></pre>
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 13 — Storage Engine Internals
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>Storage Engine Internals</h2>
-  <div class="slide-two-col">
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">13</span>
+    <h2>Storage Engine Internals</h2>
+  </div>
+  <div class="cols cols-2">
     <div>
       <h3>Heap files &amp; pages</h3>
       <p>Table data stored in fixed-size <em>pages</em> (8 kB in Postgres, 16 kB in MySQL). Each page holds multiple tuples plus a page header and item ID array.</p>
-      <div class="diagram-box">
+      <div style="background:var(--bg2); border:1px solid var(--border); border-radius:6px; padding:.5em;">
         <svg viewBox="0 0 290 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
           <!-- Page outline -->
           <rect x="8" y="8" width="274" height="114" rx="5" fill="#111118" stroke="#f5a623" stroke-width="1.2"/>
@@ -874,10 +781,10 @@ FOR SHARE;</code></pre>
     <div>
       <h3>Write-Ahead Log (WAL)</h3>
       <p>Changes are written to the WAL (sequential) <em>before</em> the data pages are modified. On crash, the engine replays the WAL to restore consistency.</p>
-      <div class="kv-row" style="margin-top:0.5em"><span class="kv-key">LSN</span><span class="kv-val">Log Sequence Number — monotonically increasing WAL position</span></div>
-      <div class="kv-row"><span class="kv-key">Checkpoint</span><span class="kv-val">Flush dirty pages to disk; WAL before the checkpoint can be recycled</span></div>
-      <div class="kv-row"><span class="kv-key">REDO</span><span class="kv-val">Replay committed WAL entries after crash</span></div>
-      <div class="kv-row"><span class="kv-key">UNDO</span><span class="kv-val">Roll back uncommitted entries found in the log</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.5em 0 0.2em;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">LSN</span><span style="color:var(--text)">Log Sequence Number — monotonically increasing WAL position</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Checkpoint</span><span style="color:var(--text)">Flush dirty pages to disk; WAL before the checkpoint can be recycled</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">REDO</span><span style="color:var(--text)">Replay committed WAL entries after crash</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">UNDO</span><span style="color:var(--text)">Roll back uncommitted entries found in the log</span></div>
       <h3 style="margin-top:0.7em">LSM-Tree alternative</h3>
       <p>Used by RocksDB, Cassandra, ScyllaDB. Writes go to an in-memory <em>memtable</em>, then flush to immutable sorted string tables (SSTables) on disk. Sequential write throughput far exceeds B-tree for write-heavy workloads.</p>
     </div>
@@ -887,9 +794,12 @@ FOR SHARE;</code></pre>
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 14 — NoSQL: Document
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>NoSQL — Document Databases</h2>
-  <div class="slide-two-col-wide">
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">14</span>
+    <h2>NoSQL — Document Databases</h2>
+  </div>
+  <div class="cols cols-6040">
     <div>
       <p>Store self-describing JSON/BSON documents. No fixed schema — each document in a collection can have different fields. Exemplar: <em>MongoDB</em>, <em>CouchDB</em>, <em>Firestore</em>.</p>
       <pre><code class="json">{
@@ -906,8 +816,8 @@ FOR SHARE;</code></pre>
   "placed_at": "2025-03-01T14:22:00Z",
   "status": "shipped"
 }</code></pre>
-      <div class="callout" style="margin-top:0.5em">
-        The entire order and its line items live in one document — one read to retrieve everything. Contrast with SQL: <code>orders</code> JOIN <code>order_items</code>.
+      <div class="card blue" style="margin-top:0.5em">
+        <p>The entire order and its line items live in one document — one read to retrieve everything. Contrast with SQL: <code>orders</code> JOIN <code>order_items</code>.</p>
       </div>
     </div>
     <div>
@@ -932,10 +842,13 @@ FOR SHARE;</code></pre>
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 15 — NoSQL: Key-Value & Wide-Column
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>NoSQL — Key-Value &amp; Wide-Column</h2>
-  <div class="slide-two-col">
-    <div class="card card-green">
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">15</span>
+    <h2>NoSQL — Key-Value &amp; Wide-Column</h2>
+  </div>
+  <div class="cols cols-2">
+    <div class="card green">
       <h3>Key-Value stores</h3>
       <p>Opaque value blob addressed by a key. Fastest possible read/write. <em>Redis</em>, <em>DynamoDB</em>, <em>etcd</em>.</p>
       <pre><code class="text">SET session:u42 "{user_id:42, cart:[...]}" EX 3600
@@ -947,7 +860,7 @@ DEL session:u42</code></pre>
         <li><strong>Weakness:</strong> no ad-hoc querying beyond key lookup; value is opaque to the engine</li>
       </ul>
     </div>
-    <div class="card card-purple">
+    <div class="card purple">
       <h3>Wide-Column stores</h3>
       <p>Rows identified by a partition key; columns grouped into column families; sparse — not all rows have all columns. <em>Cassandra</em>, <em>HBase</em>, <em>Bigtable</em>.</p>
       <pre><code class="cql">CREATE TABLE events (
@@ -967,10 +880,13 @@ DEL session:u42</code></pre>
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 16 — NoSQL: Graph & Vector
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>NoSQL — Graph &amp; Vector Databases</h2>
-  <div class="slide-two-col">
-    <div class="card card-amber">
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">16</span>
+    <h2>NoSQL — Graph &amp; Vector Databases</h2>
+  </div>
+  <div class="cols cols-2">
+    <div class="card amber">
       <h3>Graph databases</h3>
       <p>Nodes and edges with arbitrary properties. Traversal queries that would require many recursive self-joins in SQL are first-class operations. <em>Neo4j</em>, <em>Amazon Neptune</em>, <em>TigerGraph</em>.</p>
       <pre><code class="cypher">// Who follows Alice's followers?
@@ -981,7 +897,7 @@ RETURN DISTINCT c.name
 LIMIT 20;</code></pre>
       <p style="font-size:0.6em"><strong>Best for:</strong> social graphs, fraud detection, recommendation engines, knowledge graphs, network topology.</p>
     </div>
-    <div class="card card-purple">
+    <div class="card purple">
       <h3>Vector databases</h3>
       <p>Store high-dimensional embedding vectors and answer approximate nearest-neighbour (ANN) queries. Indexing algorithms: HNSW, IVF-Flat, ANNOY. <em>Pinecone</em>, <em>Weaviate</em>, <em>pgvector</em> (Postgres extension), <em>Qdrant</em>.</p>
       <pre><code class="python">results = collection.query(
@@ -989,8 +905,8 @@ LIMIT 20;</code></pre>
     n_results=5
 )</code></pre>
       <p style="font-size:0.6em"><strong>Best for:</strong> semantic search, RAG pipelines for LLMs, image/audio similarity, recommendation by content.</p>
-      <div class="callout-purple callout" style="margin-top:0.4em">
-        Not a replacement for a relational DB — commonly used alongside one. Store metadata in Postgres; store the vector in pgvector or a dedicated engine.
+      <div class="card purple" style="margin-top:0.4em">
+        <p>Not a replacement for a relational DB — commonly used alongside one. Store metadata in Postgres; store the vector in pgvector or a dedicated engine.</p>
       </div>
     </div>
   </div>
@@ -999,12 +915,15 @@ LIMIT 20;</code></pre>
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 17 — CAP & BASE
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>CAP Theorem &amp; BASE</h2>
-  <div class="slide-two-col">
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">17</span>
+    <h2>CAP Theorem &amp; BASE</h2>
+  </div>
+  <div class="cols cols-2">
     <div>
       <p>In a distributed system, the CAP theorem states you can guarantee at most two of three properties simultaneously.</p>
-      <div class="diagram-box">
+      <div style="background:var(--bg2); border:1px solid var(--border); border-radius:6px; padding:.5em;">
         <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
           <!-- Triangle -->
           <polygon points="150,15 20,175 280,175" fill="none" stroke="#2a2a3a" stroke-width="1.5"/>
@@ -1026,15 +945,15 @@ LIMIT 20;</code></pre>
       </div>
     </div>
     <div>
-      <div class="callout-amber callout">
-        <strong>P is usually non-negotiable.</strong> Network partitions happen in any distributed system. The real choice is C vs A during a partition.
+      <div class="card amber">
+        <p><strong style="color:var(--amber)">P is usually non-negotiable.</strong> Network partitions happen in any distributed system. The real choice is C vs A during a partition.</p>
       </div>
       <h3 style="margin-top:0.7em">BASE vs ACID</h3>
-      <div class="kv-row"><span class="kv-key">Basically Available</span><span class="kv-val">System stays up even during partial failure</span></div>
-      <div class="kv-row"><span class="kv-key">Soft state</span><span class="kv-val">Data may be in flux — not yet propagated to all replicas</span></div>
-      <div class="kv-row"><span class="kv-key">Eventually consistent</span><span class="kv-val">Given no new updates, all replicas converge to the same value</span></div>
-      <div class="callout" style="margin-top:0.7em">
-        DynamoDB, Cassandra, and most KV stores are BASE by default. Most support tunable consistency — you can opt into stronger guarantees at higher latency cost.
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Basically Available</span><span style="color:var(--text)">System stays up even during partial failure</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Soft state</span><span style="color:var(--text)">Data may be in flux — not yet propagated to all replicas</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Eventually consistent</span><span style="color:var(--text)">Given no new updates, all replicas converge to the same value</span></div>
+      <div class="card blue" style="margin-top:0.7em">
+        <p>DynamoDB, Cassandra, and most KV stores are BASE by default. Most support tunable consistency — you can opt into stronger guarantees at higher latency cost.</p>
       </div>
     </div>
   </div>
@@ -1043,25 +962,28 @@ LIMIT 20;</code></pre>
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 18 — Replication & Sharding
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>Replication &amp; Sharding</h2>
-  <div class="slide-two-col">
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">18</span>
+    <h2>Replication &amp; Sharding</h2>
+  </div>
+  <div class="cols cols-2">
     <div>
       <h3>Replication</h3>
       <p>Maintain copies of data on multiple nodes for fault tolerance and read scaling.</p>
-      <div class="kv-row"><span class="kv-key">Primary–Replica</span><span class="kv-val">One writable primary; replicas stream the WAL and serve reads. Postgres streaming replication, MySQL binlog.</span></div>
-      <div class="kv-row"><span class="kv-key">Synchronous</span><span class="kv-val">Commit only after replica acknowledges — zero data loss, higher latency</span></div>
-      <div class="kv-row"><span class="kv-key">Asynchronous</span><span class="kv-val">Commit immediately — lower latency, small replication lag window</span></div>
-      <div class="kv-row"><span class="kv-key">Multi-primary</span><span class="kv-val">Multiple writable nodes; conflict resolution required (Galera, Spanner)</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Primary–Replica</span><span style="color:var(--text)">One writable primary; replicas stream the WAL and serve reads. Postgres streaming replication, MySQL binlog.</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Synchronous</span><span style="color:var(--text)">Commit only after replica acknowledges — zero data loss, higher latency</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Asynchronous</span><span style="color:var(--text)">Commit immediately — lower latency, small replication lag window</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Multi-primary</span><span style="color:var(--text)">Multiple writable nodes; conflict resolution required (Galera, Spanner)</span></div>
     </div>
     <div>
       <h3>Sharding (horizontal partitioning)</h3>
       <p>Split data across multiple nodes so no single node holds the full dataset.</p>
-      <div class="kv-row"><span class="kv-key">Range sharding</span><span class="kv-val">Rows with key in [0, 1M) → shard 0; [1M, 2M) → shard 1. Simple but hotspot-prone on sequential keys.</span></div>
-      <div class="kv-row"><span class="kv-key">Hash sharding</span><span class="kv-val">shard = hash(key) % n. Uniform distribution; cross-shard range queries are expensive.</span></div>
-      <div class="kv-row"><span class="kv-key">Consistent hashing</span><span class="kv-val">Ring-based; adding a node rebalances only ~1/n of keys. Used by Cassandra, DynamoDB.</span></div>
-      <div class="callout-amber callout" style="margin-top:0.5em">
-        Sharding dramatically complicates joins, transactions, and schema migrations. Exhaust vertical scaling and read replicas before sharding.
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Range sharding</span><span style="color:var(--text)">Rows with key in [0, 1M) → shard 0; [1M, 2M) → shard 1. Simple but hotspot-prone on sequential keys.</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Hash sharding</span><span style="color:var(--text)">shard = hash(key) % n. Uniform distribution; cross-shard range queries are expensive.</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Consistent hashing</span><span style="color:var(--text)">Ring-based; adding a node rebalances only ~1/n of keys. Used by Cassandra, DynamoDB.</span></div>
+      <div class="card amber" style="margin-top:0.5em">
+        <p>Sharding dramatically complicates joins, transactions, and schema migrations. Exhaust vertical scaling and read replicas before sharding.</p>
       </div>
     </div>
   </div>
@@ -1070,15 +992,18 @@ LIMIT 20;</code></pre>
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 19 — Schema Design Patterns
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>Schema Design Patterns</h2>
-  <div class="slide-three-col">
-    <div class="card card-amber">
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">19</span>
+    <h2>Schema Design Patterns</h2>
+  </div>
+  <div class="cols cols-3">
+    <div class="card amber">
       <h3>OLTP schema</h3>
       <p>Highly normalised (3NF). Many small tables. Optimised for fast, concurrent point writes/reads. Short transactions.</p>
-      <p style="font-size:0.6em;color:var(--text-dim)">e-commerce, banking, SaaS apps</p>
+      <p style="font-size:0.6em;color:var(--muted)">e-commerce, banking, SaaS apps</p>
     </div>
-    <div class="card card-green">
+    <div class="card green">
       <h3>Star schema (OLAP)</h3>
       <p>Central <em>fact table</em> (events, transactions) surrounded by <em>dimension tables</em> (time, product, customer). Denormalised for fast aggregation.</p>
       <pre style="font-size:0.55em"><code>fact_sales
@@ -1086,17 +1011,17 @@ LIMIT 20;</code></pre>
   → dim_product
   → dim_customer</code></pre>
     </div>
-    <div class="card card-purple">
+    <div class="card purple">
       <h3>EAV pattern</h3>
       <p>Entity–Attribute–Value: a generic <code>(entity_id, attr_name, value)</code> triple table — flexible but slow and hard to constrain. Use JSONB or a document DB instead in modern systems.</p>
     </div>
   </div>
-  <div class="slide-two-col" style="margin-top:0.8em">
-    <div class="callout callout-amber">
-      <strong>Polymorphic associations</strong> — one FK column that can reference multiple tables by adding a <code>type</code> discriminator column. Efficient but violates strict referential integrity. Works well in practice for comment/like/notification systems.
+  <div class="cols cols-2" style="margin-top:0.8em">
+    <div class="card amber">
+      <p><strong style="color:var(--amber)">Polymorphic associations</strong> — one FK column that can reference multiple tables by adding a <code>type</code> discriminator column. Efficient but violates strict referential integrity. Works well in practice for comment/like/notification systems.</p>
     </div>
-    <div class="callout callout-purple">
-      <strong>Soft delete</strong> — add <code>deleted_at TIMESTAMP NULL</code> instead of issuing <code>DELETE</code>. Preserves audit history and enables undo. Requires <code>WHERE deleted_at IS NULL</code> on all queries — consider a partial index or a view.
+    <div class="card purple">
+      <p><strong style="color:var(--amber)">Soft delete</strong> — add <code>deleted_at TIMESTAMP NULL</code> instead of issuing <code>DELETE</code>. Preserves audit history and enables undo. Requires <code>WHERE deleted_at IS NULL</code> on all queries — consider a partial index or a view.</p>
     </div>
   </div>
 </section>
@@ -1104,9 +1029,12 @@ LIMIT 20;</code></pre>
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 20 — Migrations & Schema Evolution
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>Migrations &amp; Schema Evolution</h2>
-  <div class="slide-two-col">
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">20</span>
+    <h2>Migrations &amp; Schema Evolution</h2>
+  </div>
+  <div class="cols cols-2">
     <div>
       <h3>Version-controlled migrations</h3>
       <p>Store schema changes as ordered migration files in source control. Tools: <em>Flyway</em>, <em>Liquibase</em>, <em>Alembic</em> (Python), <em>golang-migrate</em>, Rails <em>ActiveRecord migrations</em>.</p>
@@ -1117,17 +1045,17 @@ ALTER TABLE users
 
 CREATE INDEX idx_users_tier ON users(tier);
 </code></pre>
-      <div class="callout" style="margin-top:0.4em">
-        Each migration is applied exactly once. The tool tracks the current schema version in a <code>schema_history</code> / <code>flyway_schema_history</code> table.
+      <div class="card blue" style="margin-top:0.4em">
+        <p>Each migration is applied exactly once. The tool tracks the current schema version in a <code>schema_history</code> / <code>flyway_schema_history</code> table.</p>
       </div>
     </div>
     <div>
       <h3>Zero-downtime migration patterns</h3>
-      <div class="kv-row"><span class="kv-key">Expand-contract</span><span class="kv-val">1. Add new column (nullable). 2. Deploy app writing both old &amp; new. 3. Backfill. 4. Make NOT NULL. 5. Remove old column.</span></div>
-      <div class="kv-row" style="margin-top:0.4em"><span class="kv-key">Ghost / pt-osc</span><span class="kv-val">Tools that rebuild a table in the background and swap atomically — safe for large tables in production.</span></div>
-      <div class="kv-row" style="margin-top:0.4em"><span class="kv-key">Feature flags</span><span class="kv-val">Gate new schema paths in application code; decouple deploy from schema cutover.</span></div>
-      <div class="callout-amber callout" style="margin-top:0.8em">
-        <strong>Never run DDL in a transaction without knowing your DB's behaviour.</strong> Postgres holds an <code>ACCESS EXCLUSIVE</code> lock for the duration of some <code>ALTER TABLE</code> statements, blocking all reads and writes.
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Expand-contract</span><span style="color:var(--text)">1. Add new column (nullable). 2. Deploy app writing both old &amp; new. 3. Backfill. 4. Make NOT NULL. 5. Remove old column.</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.4em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Ghost / pt-osc</span><span style="color:var(--text)">Tools that rebuild a table in the background and swap atomically — safe for large tables in production.</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.4em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Feature flags</span><span style="color:var(--text)">Gate new schema paths in application code; decouple deploy from schema cutover.</span></div>
+      <div class="card amber" style="margin-top:0.8em">
+        <p><strong style="color:var(--amber)">Never run DDL in a transaction without knowing your DB's behaviour.</strong> Postgres holds an <code>ACCESS EXCLUSIVE</code> lock for the duration of some <code>ALTER TABLE</code> statements, blocking all reads and writes.</p>
       </div>
     </div>
   </div>
@@ -1136,8 +1064,11 @@ CREATE INDEX idx_users_tier ON users(tier);
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 21 — Choosing the Right Database
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>Choosing the Right Database</h2>
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">21</span>
+    <h2>Choosing the Right Database</h2>
+  </div>
   <table>
     <tr>
       <th>Workload / Need</th>
@@ -1190,17 +1121,20 @@ CREATE INDEX idx_users_tier ON users(tier);
       <td>Postgres <code>tsvector</code>, Typesense, Meilisearch</td>
     </tr>
   </table>
-  <div class="callout-amber callout" style="margin-top:0.5em;font-size:0.6em">
-    Before adding a new database to your stack, ask: can Postgres do this well enough? The operational overhead of a second persistence system is almost always underestimated.
+  <div class="card amber" style="margin-top:0.5em;font-size:0.6em">
+    <p>Before adding a new database to your stack, ask: can Postgres do this well enough? The operational overhead of a second persistence system is almost always underestimated.</p>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════
   SLIDE 22 — Summary & References
 ══════════════════════════════════════════════════════════════════ -->
-<section>
-  <h2>Summary &amp; Further Reading</h2>
-  <div class="slide-two-col">
+<section data-background-color="#0a0a0f">
+  <div class="slide-hdr">
+    <span class="tag">22</span>
+    <h2>Summary &amp; Further Reading</h2>
+  </div>
+  <div class="cols cols-2">
     <div>
       <h3>Key takeaways</h3>
       <ul>
@@ -1216,19 +1150,21 @@ CREATE INDEX idx_users_tier ON users(tier);
     </div>
     <div>
       <h3>Recommended reading</h3>
-      <div class="kv-row"><span class="kv-key">Kleppmann</span><span class="kv-val"><em>Designing Data-Intensive Applications</em> — the canonical distributed-systems and database reference</span></div>
-      <div class="kv-row" style="margin-top:0.4em"><span class="kv-key">Ramakrishnan</span><span class="kv-val"><em>Database Management Systems</em> — rigorous foundations: query optimisation, concurrency, recovery</span></div>
-      <div class="kv-row" style="margin-top:0.4em"><span class="kv-key">PostgreSQL Docs</span><span class="kv-val"><a href="https://www.postgresql.org/docs/">postgresql.org/docs</a> — the best-written database manual in existence</span></div>
-      <div class="kv-row" style="margin-top:0.4em"><span class="kv-key">use-the-index-luke</span><span class="kv-val"><a href="https://use-the-index-luke.com">use-the-index-luke.com</a> — indexing and query optimisation deep-dives</span></div>
-      <div class="kv-row" style="margin-top:0.4em"><span class="kv-key">CMU 15-445</span><span class="kv-val">Andy Pavlo's Database Systems course — free on YouTube, outstanding breadth</span></div>
-      <div class="callout" style="margin-top:0.8em">
-        <span class="pill pill-amber">PostgreSQL</span>
-        <span class="pill pill-green">Redis</span>
-        <span class="pill pill-purple">MongoDB</span>
-        <span class="pill pill-amber">Cassandra</span>
-        <span class="pill pill-green">ClickHouse</span>
-        <span class="pill pill-purple">Neo4j</span>
-        <span class="pill pill-amber">SQLite</span>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.2em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Kleppmann</span><span style="color:var(--text)"><em>Designing Data-Intensive Applications</em> — the canonical distributed-systems and database reference</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.4em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">Ramakrishnan</span><span style="color:var(--text)"><em>Database Management Systems</em> — rigorous foundations: query optimisation, concurrency, recovery</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.4em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">PostgreSQL Docs</span><span style="color:var(--text)"><a href="https://www.postgresql.org/docs/">postgresql.org/docs</a> — the best-written database manual in existence</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.4em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">use-the-index-luke</span><span style="color:var(--text)"><a href="https://use-the-index-luke.com">use-the-index-luke.com</a> — indexing and query optimisation deep-dives</span></div>
+      <div style="display:flex; gap:0.6em; align-items:baseline; font-size:0.52em; margin:0.4em 0;"><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); min-width:9em; font-size:0.9em;">CMU 15-445</span><span style="color:var(--text)">Andy Pavlo's Database Systems course — free on YouTube, outstanding breadth</span></div>
+      <div class="card blue" style="margin-top:0.8em">
+        <p>
+        <span class="pill amber">PostgreSQL</span>
+        <span class="pill green">Redis</span>
+        <span class="pill purple">MongoDB</span>
+        <span class="pill amber">Cassandra</span>
+        <span class="pill green">ClickHouse</span>
+        <span class="pill purple">Neo4j</span>
+        <span class="pill amber">SQLite</span>
+        </p>
       </div>
     </div>
   </div>
@@ -1237,26 +1173,23 @@ CREATE INDEX idx_users_tier ON users(tier);
 </div><!-- /slides -->
 </div><!-- /reveal -->
 
-<!-- Reveal.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/highlight/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/notes/notes.min.js"></script>
-
 <script>
-  Reveal.initialize({
-    hash: true,
-    slideNumber: true,
-    progress: true,
-    controls: true,
-    center: false,
-    width: 1280,
-    height: 900,
-    margin: 0.02,
-    transition: 'fade',
-    transitionSpeed: 'fast',
-    backgroundTransition: 'none',
-    plugins: [ RevealHighlight, RevealNotes ]
-  });
+Reveal.initialize({
+  hash: true,
+  slideNumber: 'c/t',
+  transition: 'fade',
+  transitionSpeed: 'fast',
+  controls: true,
+  progress: true,
+  center: false,
+  width: 1100,
+  height: 900,
+  margin: 0.01,
+  plugins: [RevealHighlight],
+  highlight: { theme: 'monokai' }
+});
 </script>
 <script>
 (function(){
