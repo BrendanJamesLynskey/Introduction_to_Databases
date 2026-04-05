@@ -4,6 +4,8 @@ An interactive slide deck covering relational theory, SQL, transactions, indexin
 
 ## ▶ [Open Presentation](https://brendanjameslynskey.github.io/Introduction_to_Databases/index.html)
 
+## 📄 [Markdown Version](presentation.md)
+
 ---
 
 ## Contents
